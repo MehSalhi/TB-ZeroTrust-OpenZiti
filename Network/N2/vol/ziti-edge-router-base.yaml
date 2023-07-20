@@ -1,0 +1,71 @@
+v: 3
+
+identity:
+  cert:                 "/persistent/ziti-edge-router-base.cert"
+  server_cert:          "/persistent/ziti-edge-router-base.server.chain.cert"
+  key:                  "/persistent/ziti-edge-router-base.key"
+  ca:                   "/persistent/ziti-edge-router-base.cas"
+
+ctrl:
+  endpoint:             tls:ziti-controller:6262
+
+link:
+  dialers:
+    - binding: transport
+  listeners:
+    - binding:          transport
+      bind:             tls:0.0.0.0:10080
+      advertise:        tls:ziti-edge-router-base:10080
+      options:
+        outQueueSize:   4
+
+listeners:
+# bindings of edge and tunnel requires an "edge" section below
+  - binding: edge
+    address: tls:0.0.0.0:3022
+    options:
+      advertise: ziti-edge-router-base:3022
+      connectTimeoutMs: 1000
+      getSessionTimeout: 60
+  - binding: tunnel
+    options:
+      mode: host #tproxy|host
+
+
+
+edge:
+  csr:
+    country: US
+    province: NC
+    locality: Charlotte
+    organization: NetFoundry
+    organizationalUnit: Ziti
+    sans:
+      dns:
+        - ziti-edge-router-base
+        - localhost
+      ip:
+        - "127.0.0.1"
+
+
+#transport:
+#  ws:
+#    writeTimeout: 10
+#    readTimeout: 5
+#    idleTimeout: 5
+#    pongTimeout: 60
+#    pingInterval: 54
+#    handshakeTimeout: 10
+#    readBufferSize: 4096
+#    writeBufferSize: 4096
+#    enableCompression: true
+#    server_cert: /persistent/ziti-edge-router-base.server.chain.cert
+#    key: /persistent/ziti-edge-router-base.key
+
+forwarder:
+  latencyProbeInterval: 10
+  xgressDialQueueLength: 1000
+  xgressDialWorkerCount: 128
+  linkDialQueueLength: 1000
+  linkDialWorkerCount: 32
+  

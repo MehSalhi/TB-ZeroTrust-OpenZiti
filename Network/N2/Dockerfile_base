@@ -1,0 +1,18 @@
+# Dockerfile to build the base
+
+FROM debian:bullseye-slim
+
+RUN apt update 
+RUN apt install -y apt-transport-https ca-certificates ncat telnet
+RUN curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
+| gpg --dearmor \
+| tee /usr/share/keyrings/openziti.gpg >/dev/null 
+RUN echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
+| tee /etc/apt/sources.list.d/openziti.list >/dev/null
+RUN apt update --allow-insecure-repositories
+#RUN apt update
+RUN apt install -y ziti-edge-tunnel --allow-unauthenticated
+
+# create the /dev/net/tun interface for the tunneler
+RUN mkdir -p /dev/net && mknod /dev/net/tun c 10 200 && chmod 600 /dev/net/tun
+

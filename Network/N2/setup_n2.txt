@@ -1,0 +1,10 @@
+Network 2
+Connexion au contrôleur :
+
+ZITI_PWD=6rsH4OqS6hUWqdAJRFvMHI-miCAeP7kr
+
+ZAC console:
+http://localhost:1408/
+
+controller name: controller
+https://ziti-controller:1280

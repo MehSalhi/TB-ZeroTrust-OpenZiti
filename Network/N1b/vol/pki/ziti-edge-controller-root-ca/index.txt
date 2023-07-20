@@ -1,0 +1,2 @@
+V	330616114224Z		8ACE64BA0E8747566943E18CCF28DDED	ziti-edge-controller-root-ca.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-edge-controller-root-ca Root CA
+V	330616114227Z		A9974C1BE59D6DFD6DFD2ACC9F8C49BE	ziti-edge-controller-intermediate.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-edge-controller-intermediate

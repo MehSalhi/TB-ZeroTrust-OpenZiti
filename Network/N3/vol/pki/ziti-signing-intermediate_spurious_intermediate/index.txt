@@ -1,0 +1,1 @@
+V	330701093950Z		E2D65AD4B95F55F876C833D9D18EB5A4	ziti-signing-intermediate.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-signing-intermediate

@@ -1,0 +1,2 @@
+V	330619091220Z		1B3E2F5585EB55E4997AC4A918B352F4	ziti-controller-root-ca.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-controller-root-ca Root CA
+V	330619091223Z		59C4D1008DAE48D6B407AA9B89700940	ziti-controller-intermediate.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-controller-intermediate

@@ -1,0 +1,165 @@
+# n2
+version: '2.4'
+services:
+  # openziti controller
+  # accessible depuis internet
+  ziti-controller:
+    hostname: ziti-edge-controller
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    env_file:
+      - ./.env
+    ports:
+      - ${ZITI_EDGE_CONTROLLER_PORT:-1280}:${ZITI_EDGE_CONTROLLER_PORT:-1280}
+      - ${ZITI_CTRL_PORT:-6262}:${ZITI_CTRL_PORT:-6262}
+    environment:
+      - ZITI_EDGE_IDENTITY_ENROLLMENT_DURATION=${ZITI_EDGE_IDENTITY_ENROLLMENT_DURATION}
+      - ZITI_EDGE_ROUTER_ENROLLMENT_DURATION=${ZITI_EDGE_ROUTER_ENROLLMENT_DURATION}
+    volumes:
+      - type: bind
+        source: ./vol
+        target: /persistent
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    entrypoint:
+      - "/var/openziti/scripts/run-controller.sh"
+    networks:
+      ziti:
+         aliases:
+           - ziti-edge-controller
+
+  # controller init
+  ziti-controller-init-container:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    depends_on:
+      - ziti-controller
+    environment:
+      - ZITI_CONTROLLER_RAWNAME="${ZITI_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_CONTROLLER_RAWNAME="${ZITI_EDGE_CONTROLLER_RAWNAME}"
+    env_file:
+      - ./.env
+    networks:
+      - ziti
+    volumes:
+      - type: bind
+        source: ./vol
+        target: /persistent
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    entrypoint:
+      - "/var/openziti/scripts/run-with-ziti-cli.sh"
+    command:
+      - "/var/openziti/scripts/access-control.sh"
+
+###################################
+# Routers
+###################################
+
+  # edge router laptop
+  ziti-edge-router-laptop:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    hostname: ziti-edge-router-laptop
+    depends_on:
+      - ziti-controller
+    environment:
+      - ZITI_CONTROLLER_RAWNAME="${ZITI_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_CONTROLLER_RAWNAME="${ZITI_EDGE_CONTROLLER_RAWNAME}"
+        #- ZITI_EDGE_ROUTER_RAWNAME=${ZITI_EDGE_ROUTER_RAWNAME:-ziti-edge-router-laptop}
+      - ZITI_EDGE_ROUTER_RAWNAME="ziti-edge-router-laptop"
+      - ZITI_EDGE_ROUTER_ROLES=public
+    ports:
+      - ${ZITI_EDGE_ROUTER_PORT:-3022}:${ZITI_EDGE_ROUTER_PORT:-3022}
+      - 10080:10080
+    networks:
+      ziti:
+        aliases:
+          - ziti-edge-router-laptop
+    privileged: true
+    volumes:
+      - type: bind
+        source: ./vol
+        target: /persistent
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    entrypoint: ["bash", "-c", sleep 5 && /var/openziti/ziti-bin/ziti-router run /persistent/ziti-edge-router-laptop.yaml]
+    #stdin_open: true
+    #tty: true
+    
+  # console
+  ziti-console:
+    image: openziti/zac
+    environment:
+      - ZAC_SERVER_CERT_CHAIN=/persistent/pki/${ZITI_EDGE_CONTROLLER_HOSTNAME:-ziti-controller}-intermediate/certs/${ZITI_EDGE_CONTROLLER_HOSTNAME:-ziti-controller}-server.cert
+      - ZAC_SERVER_KEY=/persistent/pki/${ZITI_EDGE_CONTROLLER_HOSTNAME:-ziti-controller}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME:-ziti-controller}-server.key
+      - PORTTLS=8443
+    ports:
+      - 1408:1408
+      - 8443:8443
+    working_dir: /usr/src/app
+    volumes:
+      - type: bind
+        source: ./vol
+        target: /persistent
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - ziti
+
+    ##### machines
+    # video server
+  video-server:
+    image: mehdi/rtmp-hls_server
+    build:
+      dockerfile: ./rtmp-hls-server/Dockerfile
+      context: .
+      network: host
+    depends_on:
+      - ziti-controller
+      - ziti-edge-router-laptop
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8080:8080
+      - 1935:1935
+    volumes:
+      - type: bind
+        source: ./vol
+        target: /persistent
+    healthcheck:
+      test: curl --fail http://localhost:8080 || exit 1
+    entrypoint:
+      - "/persistent/tunnel-server.sh"
+    networks: 
+      ziti:
+        aliases:
+          - video-server
+ 
+
+        ## drone
+        #  drone:
+        #    image: debian-bullslim
+        #    build:
+        #      dockerfile: ./Dockerfile_drone
+        #      context: .
+        #      network: host
+        #    depends_on:
+        #      - ziti-controller
+        #      - ziti-edge-router-laptop
+        #    cap_add:
+        #      - NET_ADMIN
+        #    volumes:
+        #      - type: bind
+        #        source: ./vol
+        #        target: /persistent
+        #    entrypoint:
+        #      - "/persistent/tunnel-drone.sh"
+        #    privileged: true
+        #    stdin_open: true
+        #    tty: true
+        #    networks: 
+        #      - ziti
+   
+
+# networks
+networks:
+  ziti:
+    driver: bridge

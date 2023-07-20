@@ -1,0 +1,53 @@
+name: C/C++ CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: ${{ matrix.spec.name }}
+    runs-on: ${{ matrix.spec.runner }}
+    container:
+      image: ${{ matrix.spec.builder }}
+    env:
+      BUILD_NUMBER: ${{ github.run_number }}
+    strategy:
+      fail-fast: false
+      matrix:
+        spec:
+          - { name: 'Linux x86_64', runner: 'ubuntu-20.04', target: 'linux-x64', builder: 'openziti/ziti-builder', test: 'true' }
+          - { name: 'Linux ARM', runner: 'ubuntu-20.04', target: 'linux-arm', builder: 'openziti/ziti-builder' }
+          - { name: 'Linux ARM64', runner: 'ubuntu-20.04', target: 'linux-arm64', builder: 'openziti/ziti-builder' }
+          - { name: 'MacOS x86_64', runner: 'macOS-11', target: 'macOS-x64', test: 'true' }
+          - { name: 'MacOS arm64', runner: 'macOS-11', target: 'macOS-arm64' }
+          - { name: 'Windows x86_64', runner: 'windows-2022', target: 'windows-x64', test: 'true' }
+          - { name: 'Windows ARM64', runner: 'windows-2022', target: 'windows-arm64' }
+    steps:
+      - name: Add msbuild to PATH
+        if: startsWith(matrix.spec.runner, 'windows')
+        uses: microsoft/setup-msbuild@v1.1
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: run build for ${{ matrix.spec.target }}
+        uses: ./.github/actions/build
+        with:
+          target: ${{ matrix.spec.target }}
+          test: ${{ matrix.spec.test }}
+          test_id: ${{ secrets.ZITI_TEST_IDENTITY }}
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ziti-prox-c-${{ matrix.spec.target }}
+          path: ./build/programs/ziti-prox-c/**/ziti-prox-c*.zip
+
+      - name: upload SDK artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ziti-sdk-${{ matrix.spec.target }}
+          path: ./build/package/ziti-sdk-*

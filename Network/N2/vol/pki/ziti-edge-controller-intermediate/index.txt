@@ -1,0 +1,2 @@
+V	240621091231Z		11D66C4E5100B2F8FB189977FDDBD56D	ziti-edge-controller-server.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-edge-controller server certificate
+V	240621091232Z		FD4D51CE5E2C6F6B0487DA92ACE0E39A	ziti-edge-controller-client.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-edge-controller

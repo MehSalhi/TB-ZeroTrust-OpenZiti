@@ -1,0 +1,2 @@
+V	330701093945Z		A5E3B0F40EBE33ABBC3254F28DB4E6E2	ziti-signing-root-ca.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-signing-root-ca Root CA
+V	330701093949Z		57C04DA472F58E515EAA89FDAF3B2417	ziti-signing-intermediate_spurious_intermediate.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-signing-intermediate_spurious_intermediate

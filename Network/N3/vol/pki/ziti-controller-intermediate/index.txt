@@ -1,0 +1,2 @@
+V	240703093952Z		E9722EF584F125A4084F1FCF575CF61B	ziti-controller-server.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-controller server certificate
+V	240703093955Z		1659174C5F76EBAFEB0C6AB020401DE0	ziti-controller-client.cert	/C=US/O=NetFoundry/OU=ADV-DEV/L=Charlotte/CN=ziti-controller

@@ -1,0 +1,187 @@
+version: '2.4'
+services:
+  ziti-controller:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    env_file:
+      - ./.env
+    ports:
+      - ${ZITI_EDGE_CONTROLLER_PORT:-1280}:${ZITI_EDGE_CONTROLLER_PORT:-1280}
+      - ${ZITI_CTRL_PORT:-6262}:${ZITI_CTRL_PORT:-6262}
+    environment:
+      - ZITI_EDGE_IDENTITY_ENROLLMENT_DURATION=${ZITI_EDGE_IDENTITY_ENROLLMENT_DURATION}
+      - ZITI_EDGE_ROUTER_ENROLLMENT_DURATION=${ZITI_EDGE_ROUTER_ENROLLMENT_DURATION}
+    networks:
+      zitiblue:
+        aliases:
+          - ziti-edge-controller
+      zitired:
+        aliases:
+          - ziti-edge-controller
+    volumes:
+      - ziti-fs:/persistent
+    entrypoint:
+      - "/var/openziti/scripts/run-controller.sh"
+
+  ziti-controller-init-container:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    depends_on:
+      - ziti-controller
+    environment:
+      - ZITI_CONTROLLER_RAWNAME="${ZITI_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_CONTROLLER_RAWNAME="${ZITI_EDGE_CONTROLLER_RAWNAME}"
+    env_file:
+      - ./.env
+    networks:
+      zitiblue:
+        aliases:
+          - ziti-edge-controller-init-container
+      zitired:
+        aliases:
+          - ziti-edge-controller-init-container
+    volumes:
+      - ziti-fs:/persistent
+    entrypoint:
+      - "/var/openziti/scripts/run-with-ziti-cli.sh"
+    command:
+      - "/var/openziti/scripts/access-control.sh"
+
+  ziti-edge-router:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    depends_on:
+      - ziti-controller
+    environment:
+      - ZITI_CONTROLLER_RAWNAME="${ZITI_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_CONTROLLER_RAWNAME="${ZITI_EDGE_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_ROUTER_RAWNAME=${ZITI_EDGE_ROUTER_RAWNAME:-ziti-edge-router}
+      - ZITI_EDGE_ROUTER_ROLES=public
+    ports:
+      - ${ZITI_EDGE_ROUTER_PORT:-3022}:${ZITI_EDGE_ROUTER_PORT:-3022}
+    networks:
+      - zitiblue
+      - zitired
+    volumes:
+      - ziti-fs:/persistent
+    entrypoint: /bin/bash
+    command: "/var/openziti/scripts/run-router.sh edge"
+
+  ziti-edge-router-wss:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    depends_on:
+      - ziti-controller
+    environment:
+      - ZITI_CONTROLLER_RAWNAME="${ZITI_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_CONTROLLER_RAWNAME="${ZITI_EDGE_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_ROUTER_RAWNAME=ziti-edge-router-wss
+      - ZITI_EDGE_ROUTER_PORT=3023
+      - ZITI_EDGE_ROUTER_ROLES=public
+    ports:
+      - 3023:3023
+    networks:
+      - zitiblue
+      - zitired
+    volumes:
+      - ziti-fs:/persistent
+    entrypoint: /bin/bash
+    command: "/var/openziti/scripts/run-router.sh wss"
+
+  ziti-fabric-router-br:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    depends_on:
+      - ziti-controller
+    environment:
+      - ZITI_CONTROLLER_RAWNAME="${ZITI_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_CONTROLLER_RAWNAME="${ZITI_EDGE_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_ROUTER_RAWNAME=ziti-fabric-router-br
+    #ports:
+    #  - 3024:3024
+    networks:
+      - zitiblue
+      - zitired
+    volumes:
+      - ziti-fs:/persistent
+    entrypoint: /bin/bash
+    command: "/var/openziti/scripts/run-router.sh fabric"
+
+  ziti-private-red:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    depends_on:
+      - ziti-controller
+    environment:
+      - ZITI_CONTROLLER_RAWNAME="${ZITI_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_CONTROLLER_RAWNAME="${ZITI_EDGE_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_ROUTER_RAWNAME=ziti-private-red
+    #ports:
+    #  - 3025:3025
+    networks:
+      - zitired
+    volumes:
+      - ziti-fs:/persistent
+    entrypoint: /bin/bash
+    command: "/var/openziti/scripts/run-router.sh private"
+
+  ziti-private-blue:
+    image: "${ZITI_IMAGE}:${ZITI_VERSION}"
+    depends_on:
+      - ziti-controller
+    environment:
+      - ZITI_CONTROLLER_RAWNAME="${ZITI_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_CONTROLLER_RAWNAME="${ZITI_EDGE_CONTROLLER_RAWNAME}"
+      - ZITI_EDGE_ROUTER_RAWNAME=ziti-private-blue
+    #ports:
+    #  - 3026:3026
+    networks:
+      - zitiblue
+    volumes:
+      - ziti-fs:/persistent
+    entrypoint: /bin/bash
+    command: "/var/openziti/scripts/run-router.sh private"
+
+  web-test-blue:
+    image: crccheck/hello-world
+      #ports:
+      #- 80:8000
+    networks:
+      zitiblue:
+        aliases:
+          - web-test-blue
+          - web-test.blue
+          - web.test.blue
+
+  web-test-red:
+    image: crccheck/hello-world
+    ports:
+      - 82:8000
+    networks:
+      zitiblue:
+        aliases:
+          - web-test-red
+          - web-test.red
+          - web.test.red
+
+
+  ziti-console:
+    image: openziti/zac
+    environment:
+      - ZAC_SERVER_CERT_CHAIN=/persistent/pki/${ZITI_EDGE_CONTROLLER_HOSTNAME:-ziti-controller}-intermediate/certs/${ZITI_EDGE_CONTROLLER_HOSTNAME:-ziti-controller}-server.cert
+      - ZAC_SERVER_KEY=/persistent/pki/${ZITI_EDGE_CONTROLLER_HOSTNAME:-ziti-controller}-intermediate/keys/${ZITI_EDGE_CONTROLLER_HOSTNAME:-ziti-controller}-server.key
+      - PORTTLS=8443
+    ports:
+      - 1408:1408
+      - 8443:8443
+    working_dir: /usr/src/app
+    volumes:
+      - ziti-fs:/persistent
+
+    networks:
+      - zitiblue
+      - zitired
+
+
+networks:
+  zitired:
+    driver: bridge
+  zitiblue:
+    driver: bridge
+volumes:
+  ziti-fs:
+

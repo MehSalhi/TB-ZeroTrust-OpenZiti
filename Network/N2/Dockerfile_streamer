@@ -1,0 +1,24 @@
+# Dockerfile to build the streaming devices
+# will stream a video for testing purposes
+
+FROM linuxserver/ffmpeg
+COPY ./video /video
+
+RUN apt update --allow-insecure-repositories
+RUN apt install -y apt-transport-https ca-certificates
+RUN curl -sSLf https://get.openziti.io/tun/package-repos.gpg \
+| gpg --dearmor \
+| tee /usr/share/keyrings/openziti.gpg >/dev/null 
+RUN echo 'deb [signed-by=/usr/share/keyrings/openziti.gpg] https://packages.openziti.org/zitipax-openziti-deb-stable focal main' \
+| tee /etc/apt/sources.list.d/openziti.list >/dev/null
+RUN apt update --allow-insecure-repositories
+RUN apt install -y ziti-edge-tunnel --allow-unauthenticated
+
+# create the /dev/net/tun interface for the tunneler
+RUN mkdir -p /dev/net && mknod /dev/net/tun c 10 200 && chmod 600 /dev/net/tun
+
+#RUN apt install -y wget
+#RUN wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl-libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+#RUN apt install -y ./libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+
+ENTRYPOINT ffmpeg -re -i /video/nautilus.mp4 -f flv rtmp://video-server/live/test

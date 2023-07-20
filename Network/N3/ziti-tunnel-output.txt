@@ -1,0 +1,194 @@
+(1642)[        0.000]    INFO ziti-sdk:utils.c:188 ziti_log_set_level() set log level: root=6/TRACE
+(1642)[        0.000]   DEBUG ziti-edge-tunnel:utils.c:33 run_command_va() system(ip link set tun0 up) returned 0
+(1642)[        0.000]   DEBUG ziti-edge-tunnel:utils.c:33 run_command_va() system(ip addr add 100.64.0.1 dev tun0) returned 0
+(1642)[        0.000]   DEBUG ziti-edge-tunnel:tun.c:303 init_dns_maintainer() setting up NETLINK listener
+(1642)[        0.000]   DEBUG ziti-edge-tunnel:utils.c:33 run_command_va() system(ip route add 100.64.0.0/10 dev tun0) returned 0
+(1642)[        0.000]    INFO tunnel-sdk:ziti_tunnel.c:60 create_tunneler_ctx() Ziti Tunneler SDK (v0.21.6-local)
+(1642)[        0.000]    INFO tunnel-cbs:ziti_dns.c:168 seed_dns() DNS configured with range 100.64.0.0 - 100.127.255.255 (4194302 ips)
+(1642)[        0.000]   DEBUG tunnel-sdk:ziti_tunnel.c:320 ziti_tunneler_intercept() intercepting address[udp:100.64.0.2/32:53] service[ziti:dns-resolver]
+(1642)[        0.000]   DEBUG ziti-edge-tunnel:ziti-edge-tunnel.c:1619 make_socket_path() local group 'ziti' exists, gid=995
+(1642)[        0.000]    INFO ziti-edge-tunnel:ziti-edge-tunnel.c:1621 make_socket_path() effective group set to 'ziti' (gid=995)
+(1642)[        0.049]   DEBUG ziti-edge-tunnel:tun.c:279 on_dns_update_time() queuing DNS update
+(1642)[        0.050]    INFO ziti-edge-tunnel:resolvers.c:67 init_libsystemd() Initializing libsystemd
+(1642)[        0.050]    INFO tunnel-cbs:ziti_tunnel_ctrl.c:865 load_ziti_async() attempting to load ziti instance from file[/opt/openziti/etc/identities/drone_rpi7.ziti.json]
+(1642)[        0.050]    INFO tunnel-cbs:ziti_tunnel_ctrl.c:872 load_ziti_async() loading ziti instance from /opt/openziti/etc/identities/drone_rpi7.ziti.json
+(1642)[        0.050]    INFO ziti-sdk:utils.c:188 ziti_log_set_level() set log level: root=6/TRACE
+(1642)[        0.050]   DEBUG ziti-sdk:config.c:79 load_config() trying to load config from file
+(1642)[        0.050]    INFO ziti-edge-tunnel:ziti-edge-tunnel.c:1114 load_id_cb() identity[/opt/openziti/etc/identities/drone_rpi7.ziti.json] loaded
+(1642)[        0.050]    WARN ziti-edge-tunnel:instance.c:39 find_tunnel_identity() Identity ztx[/opt/openziti/etc/identities/drone_rpi7.ziti.json] is not loaded yet or already removed.
+(1642)[        0.050]   DEBUG ziti-edge-tunnel:instance-config.c:131 save_tunnel_status_to_file() Deleted backup config file /var/lib/ziti/config.json.backup
+(1642)[        0.050]   DEBUG ziti-edge-tunnel:instance-config.c:134 save_tunnel_status_to_file() Copied config file to backup config file /var/lib/ziti/config.json.backup
+(1642)[        0.050]   DEBUG ziti-edge-tunnel:instance-config.c:156 save_tunnel_status_to_file() Saved current tunnel status into Config file /var/lib/ziti/config.json
+(1642)[        0.050]   TRACE ziti-edge-tunnel:instance-config.c:160 save_tunnel_status_to_file() Cleaning up resources used for the backup of tunnel config file /var/lib/ziti/config.json
+(1642)[        0.050]   TRACE tunnel-sdk:netif_shim.c:58 netif_shim_input() received packet IGMP[100.64.0.1:8704 -> 224.0.0.22:63745] len=40
+(1642)[        0.050]   TRACE tunnel-sdk:netif_shim.c:62 netif_shim_input() done after reading 3 packets
+(1642)[        0.055]    INFO ziti-sdk:ziti.c:407 ziti_init_async() ztx[0] Ziti C SDK version 0.33.0 @ef4e96e(HEAD) starting at (2023-07-07T14:31:56.091)
+(1642)[        0.055]    INFO ziti-sdk:ziti.c:410 ziti_init_async() ztx[0] using tlsuv[v0.23.8], tls[mbed TLS 2.28.1]
+(1642)[        0.055]    INFO ziti-sdk:ziti.c:412 ziti_init_async() ztx[0] Loading ziti context with controller[https://ziti-edge-controller:1280]
+(1642)[        0.055]   DEBUG ziti-edge-tunnel:resolvers.c:95 init_libsystemd() Dynamically loaded libsystemd
+(1642)[        0.055]   DEBUG ziti-edge-tunnel:resolvers.c:341 try_libsystemd_resolver() Detected systemd is init system
+(1642)[        0.055]   DEBUG ziti-edge-tunnel:resolvers.c:348 try_libsystemd_resolver() Connected to system DBus
+(1642)[        0.055]   DEBUG ziti-edge-tunnel:resolvers.c:208 sd_bus_is_acquired_name() systemd-resolved DBus name found: org.freedesktop.resolve1
+(1642)[        0.055]    INFO ziti-edge-tunnel:resolvers.c:355 try_libsystemd_resolver() systemd-resolved selected as dns resolver manager
+(1642)[        0.055]   DEBUG ziti-sdk:ziti_ctrl.c:408 ziti_ctrl_init() ctrl[ziti-edge-controller] ziti controller client initialized
+(1642)[        0.055]   DEBUG ziti-sdk:ziti.c:434 ziti_init_async() ztx[0] using metrics interval: 0
+(1642)[        0.055] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/version]
+(1642)[        0.055]   DEBUG ziti-sdk:ziti.c:239 ziti_set_unauthenticated() ztx[0] setting api_session_state[0] to 0
+(1642)[        0.055]   DEBUG ziti-sdk:ziti_ctrl.c:244 ziti_ctrl_clear_api_session() ctrl[ziti-edge-controller] clearing api session token for ziti_controller
+(1642)[        0.055]   DEBUG ziti-sdk:ziti.c:909 ziti_re_auth() ztx[0] re-auth executing, transitioning to unauthenticated
+(1642)[        0.055]   DEBUG ziti-sdk:ziti.c:239 ziti_set_unauthenticated() ztx[0] setting api_session_state[0] to 0
+(1642)[        0.055]   DEBUG ziti-sdk:ziti_ctrl.c:244 ziti_ctrl_clear_api_session() ctrl[ziti-edge-controller] clearing api session token for ziti_controller
+(1642)[        0.055]   DEBUG ziti-sdk:ziti.c:270 is_api_session_expired() ztx[0] is_api_session_expired[TRUE] - api_session is null
+(1642)[        0.055]    INFO ziti-sdk:ziti.c:856 ziti_re_auth_with_cb() ztx[0] starting to re-auth with ctlr[https://ziti-edge-controller:1280] api_session_status[0] api_session_expired[TRUE]
+(1642)[        0.055]   DEBUG ziti-sdk:ziti.c:232 ziti_set_auth_started() ztx[0] setting api_session_state[0] to 1
+(1642)[        0.055]   DEBUG ziti-sdk:ziti.c:305 ziti_stop_api_session_refresh() ztx[0] ziti_stop_api_session_refresh: stopping api session refresh
+(1642)[        0.055] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting POST[/authenticate?method=cert]
+(1642)[        0.070]   DEBUG ziti-edge-tunnel:resolvers.c:325 set_systemd_resolved_link_setting() Success calling method: SetLinkLLMNR for link: (tun0)
+(1642)[        0.070]   DEBUG ziti-edge-tunnel:resolvers.c:325 set_systemd_resolved_link_setting() Success calling method: SetLinkMulticastDNS for link: (tun0)
+(1642)[        0.070]   DEBUG ziti-edge-tunnel:resolvers.c:325 set_systemd_resolved_link_setting() Success calling method: SetLinkDNSOverTLS for link: (tun0)
+(1642)[        0.075]   DEBUG ziti-edge-tunnel:resolvers.c:325 set_systemd_resolved_link_setting() Success calling method: SetLinkDNSSEC for link: (tun0)
+(1642)[        0.075]   DEBUG ziti-edge-tunnel:resolvers.c:325 set_systemd_resolved_link_setting() Success calling method: SetLinkDNS for link: (tun0)
+(1642)[        0.075]   DEBUG ziti-edge-tunnel:resolvers.c:403 dns_update_systemd_resolved() Setting empty domain on interface: tun0
+(1642)[        0.075]   DEBUG ziti-edge-tunnel:resolvers.c:325 set_systemd_resolved_link_setting() Success calling method: SetLinkDomains for link: (tun0)
+(1642)[        0.081]   TRACE tunnel-sdk:netif_shim.c:58 netif_shim_input() received packet IGMP[100.64.0.1:8704 -> 224.0.0.22:64001] len=40
+(1642)[        0.081]   TRACE tunnel-sdk:netif_shim.c:62 netif_shim_input() done after reading 2 packets
+(1642)[        0.081]   DEBUG ziti-edge-tunnel:resolvers.c:170 sd_bus_run_command() Success in command invocation: FlushCaches
+(1642)[        0.081]   DEBUG ziti-edge-tunnel:resolvers.c:170 sd_bus_run_command() Success in command invocation: ResetServerFeatures
+(1642)[        0.082]   DEBUG ziti-edge-tunnel:tun.c:274 after_set_dns() DNS update: 0
+(1642)[        0.138] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/version]
+(1642)[        0.138]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/version] in 0.072 s
+(1642)[        0.138]    INFO ziti-sdk:ziti.c:1511 version_cb() ztx[0] connected to controller https://ziti-edge-controller:1280 version v0.27.5(3d9801e73809 2023-02-13T21:49:17Z)
+(1642)[        0.165] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers POST[/authenticate?method=cert]
+(1642)[        0.165]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed POST[/authenticate?method=cert] in 0.100 s
+(1642)[        0.165]   DEBUG ziti-sdk:ziti_ctrl.c:257 ctrl_login_cb() ctrl[ziti-edge-controller] authenticated successfully session[cljsodrfl05lj9em3jvsslg2v]
+(1642)[        0.165]   DEBUG ziti-sdk:ziti.c:1428 api_session_cb() ztx[0] logged in successfully => api_session[cljsodrfl05lj9em3jvsslg2v]
+(1642)[        0.165]   TRACE ziti-sdk:ziti.c:1367 ziti_set_api_session() ztx[0] API supports cached_last_activity_at
+(1642)[        0.165]   DEBUG ziti-sdk:ziti.c:1378 ziti_set_api_session() ztx[0] ziti api session expires in 1800 seconds
+(1642)[        0.165]    INFO ziti-sdk:ziti.c:1402 ziti_set_api_session() ztx[0] api session set, setting api_session_timer to 1740s
+(1642)[        0.165]   DEBUG ziti-sdk:ziti.c:310 ziti_schedule_api_session_refresh() ztx[0] ziti_schedule_api_session_refresh: scheduling api session refresh: 1740000ms
+(1642)[        0.165]   DEBUG ziti-sdk:ziti.c:264 ziti_set_fully_authenticated() ztx[0] setting api_session_state[1] to 3
+(1642)[        0.165] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-identity]
+(1642)[        0.165] VERBOSE ziti-sdk:ziti.c:1324 session_post_auth_query_cb() ztx[0] post auth query callback starting with status[OK]
+(1642)[        0.165] VERBOSE ziti-sdk:ziti.c:1326 session_post_auth_query_cb() ztx[0] transitioning to fully authenticated
+(1642)[        0.165]   DEBUG ziti-sdk:ziti.c:264 ziti_set_fully_authenticated() ztx[0] setting api_session_state[3] to 3
+(1642)[        0.165]    INFO tunnel-cbs:ziti_tunnel_ctrl.c:726 on_ziti_event() ziti_ctx[drone_rpi7.ziti] connected to controller
+(1642)[        0.165]   DEBUG tunnel-sdk:ziti_tunnel.c:127 ziti_tunneler_exclude_route() excluding ziti-edge-controller from tunneler intercept
+(1642)[        0.165]   DEBUG tunnel-sdk:ziti_tunnel.c:143 ziti_tunneler_exclude_route() 192.168.1.145 is a local address on eth0; not excluding route
+(1642)[        0.165]    INFO ziti-edge-tunnel:ziti-edge-tunnel.c:1144 on_event() ztx[/opt/openziti/etc/identities/drone_rpi7.ziti.json] context event : status is OK
+(1642)[        0.165]   DEBUG ziti-edge-tunnel:ziti-edge-tunnel.c:1196 on_event() ztx[/opt/openziti/etc/identities/drone_rpi7.ziti.json] controller connected
+(1642)[        0.165]   DEBUG ziti-edge-tunnel:ziti-edge-tunnel.c:761 send_events_message() Events Message => {"Op":"identity","Action":"added","Fingerprint":"/opt/openziti/etc/identities/drone_rpi7.ziti","Id":{"Name":"drone_rpi7.ziti","Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json","FingerPrint":"/opt/openziti/etc/identities/drone_rpi7.ziti","Active":true,"Loaded":true,"Config":{"ztAPI":"https://ziti-edge-controller:1280"},"ControllerVersion":"v0.27.5","IdFileStatus":true,"MfaEnabled":false,"MfaNeeded":false,"Metrics":{"Up":0,"Down":0},"MfaMinTimeout":0,"MfaMaxTimeout":0,"MfaMinTimeoutRem":0,"MfaMaxTimeoutRem":0,"MinTimeoutRemInSvcEvent":0,"MaxTimeoutRemInSvcEvent":0,"Deleted":false,"Notified":false}}
+(1642)[        0.165]   DEBUG ziti-edge-tunnel:ziti-edge-tunnel.c:761 send_events_message() Events Message => {"Op":"controller","Action":"connected","Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json","Fingerprint":"/opt/openziti/etc/identities/drone_rpi7.ziti"}
+(1642)[        0.165] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-identity]
+(1642)[        0.165] VERBOSE ziti-sdk:ziti.c:1229 ziti_services_refresh() ztx[0] forcing service refresh
+(1642)[        0.165]   DEBUG ziti-sdk:ziti_ctrl.c:820 ctrl_paging_req() ctrl[ziti-edge-controller] starting paging request GET[/current-identity/edge-routers]
+(1642)[        0.165] VERBOSE ziti-sdk:ziti_ctrl.c:825 ctrl_paging_req() ctrl[ziti-edge-controller] requesting /current-identity/edge-routers?limit=25&offset=0
+(1642)[        0.165] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-identity/edge-routers?limit=25&offset=0]
+(1642)[        0.167] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-api-session/service-updates]
+(1642)[        0.171] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-identity]
+(1642)[        0.171]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-identity] in 0.004 s
+(1642)[        0.173] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-identity]
+(1642)[        0.173]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-identity] in 0.006 s
+(1642)[        0.180] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-identity/edge-routers?limit=25&offset=0]
+(1642)[        0.180]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-identity/edge-routers?limit=25&offset=0] in 0.012 s
+(1642)[        0.180]   DEBUG ziti-sdk:ziti_ctrl.c:341 ctrl_body_cb() ctrl[ziti-edge-controller] received 1/1 for paging request GET[/current-identity/edge-routers]
+(1642)[        0.180]   DEBUG ziti-sdk:ziti_ctrl.c:353 ctrl_body_cb() ctrl[ziti-edge-controller] completed paging request GET[/current-identity/edge-routers] in 0.012 s
+(1642)[        0.180]   TRACE ziti-sdk:ziti.c:1273 edge_routers_cb() ztx[0] connecting to ziti-edge-router-laptop(tls://ziti-edge-router-laptop:3022)
+(1642)[        0.180]    INFO ziti-sdk:channel.c:237 new_ziti_channel() ch[0] (ziti-edge-router-laptop) new channel for ztx[0] identity[drone_rpi7.ziti]
+(1642)[        0.180]    INFO tunnel-cbs:ziti_tunnel_ctrl.c:798 on_ziti_event() ztx[drone_rpi7.ziti] added edge router ziti-edge-router-laptop@ziti-edge-router-laptop
+(1642)[        0.180]   DEBUG tunnel-sdk:ziti_tunnel.c:127 ziti_tunneler_exclude_route() excluding ziti-edge-router-laptop from tunneler intercept
+(1642)[        0.180]   DEBUG tunnel-sdk:ziti_tunnel.c:143 ziti_tunneler_exclude_route() 192.168.1.145 is a local address on eth0; not excluding route
+(1642)[        0.180]    INFO ziti-sdk:channel.c:730 reconnect_channel() ch[0] reconnecting NOW
+(1642)[        0.181]   DEBUG ziti-sdk:channel.c:702 reconnect_cb() ch[0] connecting to tls://ziti-edge-router-laptop:3022
+(1642)[        0.183] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-api-session/service-updates]
+(1642)[        0.183]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-api-session/service-updates] in 0.015 s
+(1642)[        0.183] VERBOSE ziti-sdk:ziti.c:1189 check_service_update() ztx[0] ztx last_update = 2023-07-07T13:07:23.453Z
+(1642)[        0.183]   DEBUG ziti-sdk:ziti_ctrl.c:820 ctrl_paging_req() ctrl[ziti-edge-controller] starting paging request GET[/services]
+(1642)[        0.183] VERBOSE ziti-sdk:ziti_ctrl.c:825 ctrl_paging_req() ctrl[ziti-edge-controller] requesting /services?limit=25&offset=0
+(1642)[        0.183] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/services?limit=25&offset=0]
+(1642)[        0.187] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/services?limit=25&offset=0]
+(1642)[        0.187]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/services?limit=25&offset=0] in 0.004 s
+(1642)[        0.187]   DEBUG ziti-sdk:ziti_ctrl.c:341 ctrl_body_cb() ctrl[ziti-edge-controller] received 1/1 for paging request GET[/services]
+(1642)[        0.187]   DEBUG ziti-sdk:ziti_ctrl.c:353 ctrl_body_cb() ctrl[ziti-edge-controller] completed paging request GET[/services] in 0.004 s
+(1642)[        0.187] VERBOSE ziti-sdk:ziti.c:1231 ziti_services_refresh() ztx[0] scheduling service refresh 10 seconds from now
+(1642)[        0.187] VERBOSE ziti-sdk:ziti.c:1059 update_services() ztx[0] processing service updates
+(1642)[        0.187]   DEBUG ziti-sdk:ziti.c:1136 update_services() ztx[0] sending service event 1 added, 0 removed, 0 changed
+(1642)[        0.187]   DEBUG tunnel-cbs:ziti_tunnel_ctrl.c:683 on_service() service[video.svc]
+(1642)[        0.187]    INFO tunnel-cbs:ziti_tunnel_cbs.c:417 new_ziti_intercept() creating intercept for service[video.svc] with intercept.v1 = {"addresses":["video-server.ziti"],"portRanges":[{"high":1935,"low":1935}],"protocols":["tcp"]}
+(1642)[        0.187]    INFO tunnel-cbs:ziti_dns.c:296 new_ipv4_entry() registered DNS entry video-server.ziti -> 100.64.0.3
+(1642)[        0.187]   DEBUG tunnel-sdk:ziti_tunnel.c:320 ziti_tunneler_intercept() intercepting address[tcp:100.64.0.3/32:1935] service[video.svc]
+(1642)[        0.187]    INFO tunnel-cbs:ziti_tunnel_ctrl.c:686 on_service() starting intercepting for service[video.svc]
+(1642)[        0.187] VERBOSE ziti-edge-tunnel:ziti-edge-tunnel.c:1213 on_event() =============== ztx[/opt/openziti/etc/identities/drone_rpi7.ziti.json] service event ===============
+(1642)[        0.187]   TRACE ziti-edge-tunnel:instance.c:217 setTunnelPostureDataTimeout() Posture Query set returned a Dial policy: 2SgcdSNqJZeLwCRewkf7ya, is_passing 1
+(1642)[        0.187]   DEBUG ziti-edge-tunnel:instance.c:259 setTunnelPostureDataTimeout() service[video.svc] timeout=-1 timeoutRemaining=-1
+(1642)[        0.187]   TRACE ziti-edge-tunnel:instance.c:295 setTunnelServiceAddress() intercept.v1: {"addresses":["video-server.ziti"],"portRanges":[{"high":1935,"low":1935}],"protocols":["tcp"]}
+(1642)[        0.187]   TRACE ziti-edge-tunnel:instance.c:276 to_address() Hostname: video-server.ziti
+(1642)[        0.187]    INFO ziti-edge-tunnel:ziti-edge-tunnel.c:1269 on_event() =============== service event (added) - video.svc:5fDyEV0UmWTGAOLJwTN6zl ===============
+(1642)[        0.187]   DEBUG ziti-edge-tunnel:ziti-edge-tunnel.c:761 send_events_message() Events Message => {"Op":"bulkservice","Action":"updated","Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json","Fingerprint":"/opt/openziti/etc/identities/drone_rpi7.ziti","AddedServices":[{"Id":"5fDyEV0UmWTGAOLJwTN6zl","Name":"video.svc","Protocols":["tcp"],"Addresses":[{"IsHost":true,"HostName":"video-server.ziti","Prefix":0}],"Ports":[{"High":1935,"Low":1935}],"OwnsIntercept":true,"IsAccessible":true,"Timeout":-1,"TimeoutRemaining":-1,"Permissions":{"Bind":false,"Dial":true}}],"RemovedServices":[]}
+(1642)[        0.187]   DEBUG ziti-edge-tunnel:ziti-edge-tunnel.c:761 send_events_message() Events Message => {"Op":"identity","Action":"updated","Fingerprint":"/opt/openziti/etc/identities/drone_rpi7.ziti","Id":{"Name":"drone_rpi7.ziti","Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json","FingerPrint":"/opt/openziti/etc/identities/drone_rpi7.ziti","Active":true,"Loaded":true,"Config":{"ztAPI":"https://ziti-edge-controller:1280"},"ControllerVersion":"v0.27.5","IdFileStatus":true,"MfaEnabled":false,"MfaNeeded":false,"Services":[{"Id":"5fDyEV0UmWTGAOLJwTN6zl","Name":"video.svc","Protocols":["tcp"],"Addresses":[{"IsHost":true,"HostName":"video-server.ziti","Prefix":0}],"Ports":[{"High":1935,"Low":1935}],"OwnsIntercept":true,"IsAccessible":true,"Timeout":-1,"TimeoutRemaining":-1,"Permissions":{"Bind":false,"Dial":true}}],"Metrics":{"Up":0,"Down":0},"MfaMinTimeout":-1,"MfaMaxTimeout":-1,"MfaMinTimeoutRem":-1,"MfaMaxTimeoutRem":-1,"MinTimeoutRemInSvcEvent":-1,"MaxTimeoutRemInSvcEvent":-1,"ServiceUpdatedTime":"2023-07-07T14:31:56.223912Z","Deleted":false,"Notified":false}}
+(1642)[        0.187]    INFO ziti-edge-tunnel:tun.c:174 tun_commit_routes() starting 2 route updates
+(1642)[        0.193]   DEBUG ziti-edge-tunnel:utils.c:33 run_command_va() system(ip -force -batch /tmp/ziti-tunnel-routes.BU1qZl) returned 0
+(1642)[        0.193]    INFO ziti-edge-tunnel:tun.c:118 route_updates_done() route updates[2]: 0/OK
+(1642)[        0.247]   DEBUG ziti-sdk:channel.c:844 on_channel_connect_internal() ch[0] connected
+(1642)[        0.247]   TRACE ziti-sdk:channel.c:400 ziti_channel_send_for_reply() ch[0] => ct[0000] seq[0] len[25]
+(1642)[        0.247]   TRACE ziti-sdk:channel.c:329 on_channel_send() ch[0] write delay = 0.000d q=1 qs=89
+(1642)[        0.248]   TRACE ziti-sdk:channel.c:832 on_channel_data() ch[0] on_data [len=132]
+(1642)[        0.248]   TRACE ziti-sdk:channel.c:518 process_inbound() ch[0] <= ct[0002] seq[-1] len[0] hdrs[112]
+(1642)[        0.248]   TRACE ziti-sdk:channel.c:529 process_inbound() ch[0] completing msg seq[-1] body+hrds=0+112, in_offset=0, want=112, got=112
+(1642)[        0.248]   TRACE ziti-sdk:channel.c:540 process_inbound() ch[0] message is complete seq[-1] ct[0002]
+(1642)[        0.248]    INFO ziti-sdk:channel.c:629 hello_reply_cb() ch[0] connected. EdgeRouter version: v0.27.5|3d9801e73809|2023-02-13T21:49:17Z|linux|amd64
+(1642)[        0.248]    INFO tunnel-cbs:ziti_tunnel_ctrl.c:802 on_ziti_event() ztx[drone_rpi7.ziti] router ziti-edge-router-laptop connected
+(1642)[        0.517]   TRACE tunnel-sdk:netif_shim.c:58 netif_shim_input() received packet IGMP[100.64.0.1:8704 -> 224.0.0.22:64001] len=40
+(1642)[        0.517]   TRACE tunnel-sdk:netif_shim.c:62 netif_shim_input() done after reading 1 packets
+(1642)[        0.965]   TRACE tunnel-sdk:netif_shim.c:62 netif_shim_input() done after reading 1 packets
+(1642)[        1.165] VERBOSE ziti-sdk:posture.c:198 ziti_send_posture_data() ztx[0] starting to send posture data
+(1642)[        1.165]    INFO ziti-sdk:posture.c:204 ziti_send_posture_data() ztx[0] first run or potential controller restart detected
+(1642)[        1.165]   DEBUG ziti-sdk:posture.c:208 ziti_send_posture_data() ztx[0] posture checks must_send set to TRUE, new_session_id[TRUE], must_send_every_time[TRUE], new_controller_instance[TRUE]
+(1642)[        1.165] VERBOSE ziti-sdk:posture.c:236 ziti_send_posture_data() ztx[0] checking posture queries on 1 service(s)
+(1642)[        1.165] VERBOSE ziti-sdk:posture.c:535 ziti_pr_send_bulk() ztx[0] no change in posture data, not sending
+(1642)[        4.101]   TRACE tunnel-sdk:netif_shim.c:62 netif_shim_input() done after reading 1 packets
+(1642)[        5.050]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       10.050]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       10.187] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-api-session/service-updates]
+(1642)[       10.201] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-api-session/service-updates]
+(1642)[       10.201]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-api-session/service-updates] in 0.013 s
+(1642)[       10.201] VERBOSE ziti-sdk:ziti.c:1193 check_service_update() ztx[0] not updating: last_update is same previous (2023-07-07T13:07:23.453Z == 2023-07-07T13:07:23.453Z)
+(1642)[       10.201] VERBOSE ziti-sdk:ziti.c:1231 ziti_services_refresh() ztx[0] scheduling service refresh 10 seconds from now
+(1642)[       12.549]   TRACE tunnel-sdk:netif_shim.c:62 netif_shim_input() done after reading 1 packets
+(1642)[       15.051]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       20.051]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       20.201] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-api-session/service-updates]
+(1642)[       20.208] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-api-session/service-updates]
+(1642)[       20.208]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-api-session/service-updates] in 0.007 s
+(1642)[       20.208] VERBOSE ziti-sdk:ziti.c:1193 check_service_update() ztx[0] not updating: last_update is same previous (2023-07-07T13:07:23.453Z == 2023-07-07T13:07:23.453Z)
+(1642)[       20.208] VERBOSE ziti-sdk:ziti.c:1231 ziti_services_refresh() ztx[0] scheduling service refresh 10 seconds from now
+(1642)[       21.165] VERBOSE ziti-sdk:posture.c:198 ziti_send_posture_data() ztx[0] starting to send posture data
+(1642)[       21.165]   DEBUG ziti-sdk:posture.c:208 ziti_send_posture_data() ztx[0] posture checks must_send set to TRUE, new_session_id[FALSE], must_send_every_time[TRUE], new_controller_instance[FALSE]
+(1642)[       21.165] VERBOSE ziti-sdk:posture.c:236 ziti_send_posture_data() ztx[0] checking posture queries on 1 service(s)
+(1642)[       21.165] VERBOSE ziti-sdk:posture.c:535 ziti_pr_send_bulk() ztx[0] no change in posture data, not sending
+(1642)[       25.052]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       30.052]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       30.208] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-api-session/service-updates]
+(1642)[       30.213]   TRACE tunnel-sdk:netif_shim.c:62 netif_shim_input() done after reading 1 packets
+(1642)[       30.216] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-api-session/service-updates]
+(1642)[       30.216]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-api-session/service-updates] in 0.007 s
+(1642)[       30.216] VERBOSE ziti-sdk:ziti.c:1193 check_service_update() ztx[0] not updating: last_update is same previous (2023-07-07T13:07:23.453Z == 2023-07-07T13:07:23.453Z)
+(1642)[       30.216] VERBOSE ziti-sdk:ziti.c:1231 ziti_services_refresh() ztx[0] scheduling service refresh 10 seconds from now
+(1642)[       35.052]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       40.052]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       40.216] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-api-session/service-updates]
+(1642)[       40.224] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-api-session/service-updates]
+(1642)[       40.224]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-api-session/service-updates] in 0.008 s
+(1642)[       40.224] VERBOSE ziti-sdk:ziti.c:1193 check_service_update() ztx[0] not updating: last_update is same previous (2023-07-07T13:07:23.453Z == 2023-07-07T13:07:23.453Z)
+(1642)[       40.224] VERBOSE ziti-sdk:ziti.c:1231 ziti_services_refresh() ztx[0] scheduling service refresh 10 seconds from now
+(1642)[       41.165] VERBOSE ziti-sdk:posture.c:198 ziti_send_posture_data() ztx[0] starting to send posture data
+(1642)[       41.165]   DEBUG ziti-sdk:posture.c:208 ziti_send_posture_data() ztx[0] posture checks must_send set to TRUE, new_session_id[FALSE], must_send_every_time[TRUE], new_controller_instance[FALSE]
+(1642)[       41.165] VERBOSE ziti-sdk:posture.c:236 ziti_send_posture_data() ztx[0] checking posture queries on 1 service(s)
+(1642)[       41.165] VERBOSE ziti-sdk:posture.c:535 ziti_pr_send_bulk() ztx[0] no change in posture data, not sending
+(1642)[       45.052]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       50.052]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]
+(1642)[       50.224] VERBOSE ziti-sdk:ziti_ctrl.c:133 start_request() ctrl[ziti-edge-controller] starting GET[/current-api-session/service-updates]
+(1642)[       50.232] VERBOSE ziti-sdk:ziti_ctrl.c:168 ctrl_resp_cb() ctrl[ziti-edge-controller] received headers GET[/current-api-session/service-updates]
+(1642)[       50.232]   DEBUG ziti-sdk:ziti_ctrl.c:325 ctrl_body_cb() ctrl[ziti-edge-controller] completed GET[/current-api-session/service-updates] in 0.008 s
+(1642)[       50.232] VERBOSE ziti-sdk:ziti.c:1193 check_service_update() ztx[0] not updating: last_update is same previous (2023-07-07T13:07:23.453Z == 2023-07-07T13:07:23.453Z)
+(1642)[       50.232] VERBOSE ziti-sdk:ziti.c:1231 ziti_services_refresh() ztx[0] scheduling service refresh 10 seconds from now
+(1642)[       55.052]   TRACE tunnel-cbs:ziti_tunnel_ctrl.c:198 process_cmd() processing command[GetMetrics] with data[{"Identifier":"/opt/openziti/etc/identities/drone_rpi7.ziti.json"}]

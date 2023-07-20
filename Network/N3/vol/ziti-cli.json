@@ -1,0 +1,14 @@
+{
+    "edgeIdentities": {
+        "default": {
+            "url": "https://ziti-edge-controller:1280/edge/management/v1",
+            "username": "admin",
+            "token": "640d4292-dff3-42f0-ba5d-d93c0097f862",
+            "loginTime": "2023-07-14T10:09:10+02:00",
+            "caCert": "/persistent/certs/ziti-edge-controller",
+            "readOnly": false
+        }
+    },
+    "fabricIdentities": {},
+    "default": "default"
+}

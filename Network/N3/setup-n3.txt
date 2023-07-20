@@ -1,0 +1,9 @@
+Network 3
+Connexion au contrôleur :
+ZITI_PWD=u8QDuPghvrzE09Nk4yqTzOHk_2pCVpso
+
+ZAC console:
+http://localhost:1408/
+
+controller name: controller
+https://ziti-controller:1280
